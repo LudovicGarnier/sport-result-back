@@ -24,7 +24,7 @@ public class NbaSeasonController {
     @Operation(summary = "Return a Season from a year")
     @GetMapping("/{year}")
     public ResponseEntity<NbaSeasonDto> getNbaSeasonDto(@PathVariable int year) {
-        NbaSeasonDto seasonDto = nbaSeasonService.getNbaSeasonByYear(year);
+        NbaSeasonDto seasonDto = nbaSeasonService.findNbaSeasonByYear(year);
         return ResponseEntity.ok(seasonDto);
     }
 }
