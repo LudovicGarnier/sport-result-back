@@ -1,5 +1,6 @@
 package com.sportresult.app_back.exception;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,16 @@ public class GlobalExceptionHandler {
                 "ENTITY_NOT_FOUND", exception.getMessage(), LocalDateTime.now()
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(EntityExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolation(EntityExistsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                "ENTITY_ALREADY_EXISTS",
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
