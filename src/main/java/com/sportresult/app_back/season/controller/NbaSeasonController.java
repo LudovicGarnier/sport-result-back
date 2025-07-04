@@ -11,9 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/nbaSeasons")
+@RequestMapping("/nbaSeason")
 @RequiredArgsConstructor
-@Tag(name = "NBA Season")
+@Tag(name = "NBA Seasons")
 @Slf4j
 public class NbaSeasonController {
 

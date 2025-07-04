@@ -17,7 +17,8 @@ public class NbaSeasonService {
     private final NbaSeasonRepository nbaSeasonRepository;
 
     public NbaSeasonDto findNbaSeasonByYear(Integer year) {
-        NbaSeasonEntity nbaSeason = nbaSeasonRepository.findByYear(year).orElseThrow(() -> new EntityNotFoundException("NBA Season Not Found for Year: " + year));
+        NbaSeasonEntity nbaSeason = nbaSeasonRepository.findByYear(year).orElseThrow(
+                () -> new EntityNotFoundException("NBA Season Not Found for Year: " + year));
         return nbaSeason.toDto();
     }
 
