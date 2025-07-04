@@ -1,5 +1,6 @@
 package com.sportresult.app_back.team.service;
 
+import com.sportresult.app_back.ModelFactory;
 import com.sportresult.app_back.team.dto.NbaTeamDto;
 import com.sportresult.app_back.team.entity.NbaTeamEntity;
 import com.sportresult.app_back.team.repository.NbaTeamRepository;
@@ -30,11 +31,7 @@ class NbaTeamServiceTest {
     @DisplayName("should Find NbaTeam By Code")
     public void shouldFindNbaTeamByCode() {
         String code = "CHI";
-        NbaTeamEntity nbaTeam = NbaTeamEntity.builder()
-                .code(code)
-                .nbaFranchise(true)
-                .allStar(false)
-                .build();
+        NbaTeamEntity nbaTeam = NbaTeamEntity.builder().code(code).nbaFranchise(true).allStar(false).build();
 
         // WHEN
         when(nbaTeamRepository.findByCode(code)).thenReturn(List.of(nbaTeam));
@@ -61,16 +58,8 @@ class NbaTeamServiceTest {
     @Test
     @DisplayName("should Find All Nba Franchise")
     public void shouldFindNbaFranchise() {
-        NbaTeamEntity nbaTeam1 = NbaTeamEntity.builder()
-                .code("CODE1")
-                .nbaFranchise(true)
-                .allStar(false)
-                .build();
-        NbaTeamEntity nbaTeam2 = NbaTeamEntity.builder()
-                .code("CODE2")
-                .nbaFranchise(true)
-                .allStar(false)
-                .build();
+        NbaTeamEntity nbaTeam1 = NbaTeamEntity.builder().code("CODE1").nbaFranchise(true).allStar(false).build();
+        NbaTeamEntity nbaTeam2 = NbaTeamEntity.builder().code("CODE2").nbaFranchise(true).allStar(false).build();
         List<NbaTeamEntity> nbaFranchise = List.of(nbaTeam1, nbaTeam2);
 
         // WHEN
@@ -88,18 +77,8 @@ class NbaTeamServiceTest {
     @DisplayName("should Find NbaTeam By Division")
     public void shouldFindNbaTeamByDivision() {
         String division = "Central";
-        NbaTeamEntity nbaTeam1 = NbaTeamEntity.builder()
-                .code("CHI")
-                .nbaFranchise(true)
-                .allStar(false)
-                .division(division)
-                .build();
-        NbaTeamEntity nbaTeam2 = NbaTeamEntity.builder()
-                .code("CLE")
-                .nbaFranchise(true)
-                .allStar(false)
-                .division(division)
-                .build();
+        NbaTeamEntity nbaTeam1 = ModelFactory.createNbaTeamEntity("CHI", null, division);
+        NbaTeamEntity nbaTeam2 = ModelFactory.createNbaTeamEntity("CLE", null, division);
 
         List<NbaTeamEntity> teams = List.of(nbaTeam1, nbaTeam2);
 
@@ -127,19 +106,9 @@ class NbaTeamServiceTest {
     @Test
     @DisplayName("should Find NbaTeam By Conference")
     public void shouldFindNbaTeamByConference() {
-        String conference = "Central";
-        NbaTeamEntity nbaTeam1 = NbaTeamEntity.builder()
-                .code("CHI")
-                .nbaFranchise(true)
-                .allStar(false)
-                .conference(conference)
-                .build();
-        NbaTeamEntity nbaTeam2 = NbaTeamEntity.builder()
-                .code("CLE")
-                .nbaFranchise(true)
-                .allStar(false)
-                .conference(conference)
-                .build();
+        String conference = "East";
+        NbaTeamEntity nbaTeam1 = ModelFactory.createNbaTeamEntity("CHI", conference, null);
+        NbaTeamEntity nbaTeam2 = ModelFactory.createNbaTeamEntity("CLE", conference, null);
 
         List<NbaTeamEntity> teams = List.of(nbaTeam1, nbaTeam2);
 
@@ -151,6 +120,7 @@ class NbaTeamServiceTest {
         assertEquals(teamsByDivision.size(), teams.size());
         verify(nbaTeamRepository, times(1)).findByConference(conference);
     }
+
 
     @Test
     @DisplayName("should Throw Exception When Nba Conference Not Exists")
