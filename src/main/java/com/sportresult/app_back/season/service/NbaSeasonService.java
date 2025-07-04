@@ -22,6 +22,11 @@ public class NbaSeasonService {
         return nbaSeason.toDto();
     }
 
+    public NbaSeasonEntity findNbaSeasonEntityByYear(Integer year) {
+        return nbaSeasonRepository.findByYear(year).orElseThrow(
+                () -> new EntityNotFoundException("NBA Season Not Found for Year: " + year));
+    }
+
     public NbaSeasonDto createNbaSeasonByYear(int year) {
         if (nbaSeasonRepository.findByYear(year).isPresent()) {
             throw new EntityExistsException("NBA Season Already Exists for Year: " + year);
