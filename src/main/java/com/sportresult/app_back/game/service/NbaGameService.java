@@ -7,6 +7,7 @@ import com.sportresult.app_back.season.entity.NbaSeasonEntity;
 import com.sportresult.app_back.season.service.NbaSeasonService;
 import com.sportresult.app_back.team.entity.NbaTeamEntity;
 import com.sportresult.app_back.team.service.NbaTeamService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -53,6 +55,12 @@ public class NbaGameService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("gameStart").ascending());
         Page<NbaGameEntity> nbaGamePageable = nbaGameRepository.findNbaGameEntitiesBySeasonAndTeam(nbaSeason, nbaTeam, pageable);
         return nbaGamePageable.stream().map(NbaGameEntity::toDto).collect(Collectors.toList());
+    }
+
+    public NbaGameEntity getGameEntityById(UUID id) {
+        log.info("getGameEntityById: {}", id);
+        return nbaGameRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("NBA Game Not Found for id:" + id)
+        );
     }
 
     private NbaSeasonEntity getNbaSeasonEntity(int seasonYear) {

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -36,6 +37,13 @@ public class NbaTeamService {
             throw new EntityNotFoundException("NBA Team Not Found for Code:" + code);
         }
         return nbaTeamEntities.getFirst();
+    }
+
+
+    public NbaTeamEntity getTeamEntityById(UUID id) {
+        log.info("getTeamEntityById: {}", id);
+        return nbaTeamRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("NBA Team Not Found for id:" + id)
+        );
     }
 
     public List<NbaTeamDto> getTeamsByConference(String conference) {
