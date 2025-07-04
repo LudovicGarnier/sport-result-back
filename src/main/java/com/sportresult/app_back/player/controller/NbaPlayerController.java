@@ -25,7 +25,7 @@ public class NbaPlayerController {
     @Operation(summary = "Return all the paginated Players")
     @GetMapping
     public ResponseEntity<List<NbaPlayerDto>> getAllPlayers(@RequestParam(defaultValue = "0") int page,
-                                                               @RequestParam(defaultValue = "10") int size) {
+                                                            @RequestParam(defaultValue = "10") int size) {
         List<NbaPlayerDto> players = nbaPlayerService.getPlayersOrderByLastName(page, size);
         return ResponseEntity.ok(players);
     }

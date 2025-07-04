@@ -27,6 +27,14 @@ public class NbaTeamService {
         return nbaTeamEntities.getFirst().toDto();
     }
 
+    public NbaTeamEntity getTeamEntityByCode(String code) {
+        List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByCode(code);
+
+        if (nbaTeamEntities.isEmpty()) {
+            throw new EntityNotFoundException("NBA Team Not Found for Code:" + code);
+        }
+        return nbaTeamEntities.getFirst();
+    }
 
     public List<NbaTeamDto> getTeamsByConference(String conference) {
         List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByConference(conference);
