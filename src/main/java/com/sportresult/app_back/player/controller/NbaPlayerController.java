@@ -5,6 +5,7 @@ import com.sportresult.app_back.player.service.NbaPlayerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("nbaPlayer")
 @RequiredArgsConstructor
 @Tag(name = "NBA Players")
+@Slf4j
 public class NbaPlayerController {
 
     private final NbaPlayerService nbaPlayerService;
@@ -26,6 +28,7 @@ public class NbaPlayerController {
     @GetMapping
     public ResponseEntity<List<NbaPlayerDto>> getAllPlayers(@RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "10") int size) {
+        log.info("getAllPlayers page: {}, size: {}", page, size);
         List<NbaPlayerDto> players = nbaPlayerService.getPlayersOrderByLastName(page, size);
         return ResponseEntity.ok(players);
     }
@@ -35,6 +38,7 @@ public class NbaPlayerController {
     public ResponseEntity<List<NbaPlayerDto>> getAllPlayersByLastName(@RequestParam(defaultValue = "0") int page,
                                                                       @RequestParam(defaultValue = "10") int size,
                                                                       @RequestParam String lastname) {
+        log.info("getAllPlayersByLastName page: {}, size: {}", page, size);
         List<NbaPlayerDto> players = nbaPlayerService.getPlayersByLastNameOrderByLastName(page, size, lastname);
         return ResponseEntity.ok(players);
     }
@@ -44,6 +48,7 @@ public class NbaPlayerController {
     public ResponseEntity<List<NbaPlayerDto>> getAllPlayersByFirstName(@RequestParam(defaultValue = "0") int page,
                                                                        @RequestParam(defaultValue = "10") int size,
                                                                        @RequestParam String firstname) {
+        log.info("getAllPlayersByFirstName page: {}, size: {}", page, size);
         List<NbaPlayerDto> players = nbaPlayerService.getPlayersByFirstNameOrderByLastName(page, size, firstname);
         return ResponseEntity.ok(players);
     }
@@ -53,6 +58,7 @@ public class NbaPlayerController {
     public ResponseEntity<List<NbaPlayerDto>> getAllActivePlayers(@RequestParam(defaultValue = "0") int page,
                                                                   @RequestParam(defaultValue = "10") int size,
                                                                   @RequestParam Boolean isActive) {
+        log.info("getAllActivePlayers page: {}, size: {}", page, size);
         List<NbaPlayerDto> players = nbaPlayerService.getPlayersByIsActiveOrderByLastName(page, size, isActive);
         return ResponseEntity.ok(players);
     }

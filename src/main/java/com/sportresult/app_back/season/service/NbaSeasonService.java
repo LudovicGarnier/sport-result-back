@@ -17,17 +17,20 @@ public class NbaSeasonService {
     private final NbaSeasonRepository nbaSeasonRepository;
 
     public NbaSeasonDto findNbaSeasonByYear(Integer year) {
+        log.info("findNbaSeasonByYear year: {}", year);
         NbaSeasonEntity nbaSeason = nbaSeasonRepository.findByYear(year).orElseThrow(
                 () -> new EntityNotFoundException("NBA Season Not Found for Year: " + year));
         return nbaSeason.toDto();
     }
 
     public NbaSeasonEntity findNbaSeasonEntityByYear(Integer year) {
+        log.info("findNbaSeasonEntityByYear year: {}", year);
         return nbaSeasonRepository.findByYear(year).orElseThrow(
                 () -> new EntityNotFoundException("NBA Season Not Found for Year: " + year));
     }
 
     public NbaSeasonDto createNbaSeasonByYear(int year) {
+        log.info("createNbaSeasonByYear year: {}", year);
         if (nbaSeasonRepository.findByYear(year).isPresent()) {
             throw new EntityExistsException("NBA Season Already Exists for Year: " + year);
         }

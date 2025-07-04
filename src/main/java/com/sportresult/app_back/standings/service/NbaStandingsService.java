@@ -24,6 +24,7 @@ public class NbaStandingsService {
 
 
     public List<NbaStandingsDto> getStandingBySeason(int seasonYear) {
+        log.info("getStandingBySeason seasonYear: {}", seasonYear);
         NbaSeasonEntity seasonEntity = nbaSeasonService.findNbaSeasonEntityByYear(seasonYear);
         List<NbaStandingsEntity> entities = nbaStandingsRepository.findBySeasonStandings(seasonEntity);
         if (entities.isEmpty()) {
@@ -33,6 +34,7 @@ public class NbaStandingsService {
     }
 
     public List<NbaStandingsDto> getStandingBySeasonAndConferenceName(int seasonYear, String conferenceName) {
+        log.info("getStandingBySeasonAndConferenceName seasonYear: {}", seasonYear);
         NbaSeasonEntity seasonEntity = nbaSeasonService.findNbaSeasonEntityByYear(seasonYear);
         List<NbaStandingsEntity> entities = nbaStandingsRepository.findBySeasonStandingsAndConferenceName(seasonEntity, conferenceName);
         if (entities.isEmpty()) {
@@ -42,6 +44,7 @@ public class NbaStandingsService {
     }
 
     public List<NbaStandingsDto> getStandingBySeasonAndDivisionName(int seasonYear, String divisionName) {
+        log.info("getStandingBySeasonAndDivisionName seasonYear: {}", seasonYear);
         NbaSeasonEntity seasonEntity = nbaSeasonService.findNbaSeasonEntityByYear(seasonYear);
         List<NbaStandingsEntity> entities = nbaStandingsRepository.findBySeasonStandingsAndDivisionName(seasonEntity, divisionName);
         if (entities.isEmpty()) {

@@ -25,24 +25,28 @@ public class NbaPlayerService {
     private final NbaTeamService nbaTeamService;
 
     public List<NbaPlayerDto> getPlayersOrderByLastName(int page, int size) {
+        log.info("getPlayersOrderByLastName page: {}, size: {}", page, size);
         Pageable pageable = PageRequest.of(page, size, Sort.by("lastname").ascending());
         Page<NbaPlayerEntity> nbaPlayerPageable = nbaPlayerRepository.findAll(pageable);
         return nbaPlayerPageable.stream().map(NbaPlayerEntity::toDto).collect(Collectors.toList());
     }
 
     public List<NbaPlayerDto> getPlayersByLastNameOrderByLastName(int page, int size, String lastname) {
+        log.info("getPlayersByLastNameOrderByLastName page: {}, size: {}", page, size);
         Pageable pageable = PageRequest.of(page, size, Sort.by("lastname").ascending());
         Page<NbaPlayerEntity> nbaPlayerPageable = nbaPlayerRepository.findAllByLastname(pageable, lastname);
         return nbaPlayerPageable.stream().map(NbaPlayerEntity::toDto).collect(Collectors.toList());
     }
 
     public List<NbaPlayerDto> getPlayersByFirstNameOrderByLastName(int page, int size, String firstname) {
+        log.info("getPlayersByFirstNameOrderByLastName page: {}, size: {}", page, size);
         Pageable pageable = PageRequest.of(page, size, Sort.by("lastname").ascending());
         Page<NbaPlayerEntity> nbaPlayerPageable = nbaPlayerRepository.findAllByFirstname(pageable, firstname);
         return nbaPlayerPageable.stream().map(NbaPlayerEntity::toDto).collect(Collectors.toList());
     }
 
     public List<NbaPlayerDto> getPlayersByIsActiveOrderByLastName(int page, int size, Boolean isActive) {
+        log.info("getPlayersByIsActiveOrderByLastName page: {}, size: {}", page, size);
         Pageable pageable = PageRequest.of(page, size, Sort.by("lastname").ascending());
         Page<NbaPlayerEntity> nbaPlayerPageable = nbaPlayerRepository.findAllByIsActive(pageable, isActive);
         return nbaPlayerPageable.stream().map(NbaPlayerEntity::toDto).collect(Collectors.toList());

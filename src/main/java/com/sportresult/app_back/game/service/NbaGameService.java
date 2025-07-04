@@ -38,7 +38,7 @@ public class NbaGameService {
     }
 
     public List<NbaGameDto> getGamesBySeasonAndPerStageOrderByGameStart(int page, int size, int seasonYear, int stage) {
-        log.info("getGamesBySeasonOrderByGameStart page: {}, size: {}, seasonYear: {}, stage: {}", page, size, seasonYear, stage);
+        log.info("getGamesBySeasonAndPerStageOrderByGameStart page: {}, size: {}, seasonYear: {}, stage: {}", page, size, seasonYear, stage);
         NbaSeasonEntity nbaSeason = getNbaSeasonEntity(seasonYear);
         Pageable pageable = PageRequest.of(page, size, Sort.by("gameStart").ascending());
         Page<NbaGameEntity> nbaGamePageable = nbaGameRepository.findNbaGameEntitiesBySeasonAndStage(nbaSeason, stage, pageable);
@@ -46,7 +46,7 @@ public class NbaGameService {
     }
 
     public List<NbaGameDto> getGamesBySeasonAndByTeam(int page, int size, int seasonYear, String teamCode) {
-        log.info("getGamesBySeasonOrderByGameStart page: {}, size: {}, seasonYear: {}, teamCode: {}", page, size, seasonYear, teamCode);
+        log.info("getGamesBySeasonAndByTeam page: {}, size: {}, seasonYear: {}, teamCode: {}", page, size, seasonYear, teamCode);
         NbaSeasonEntity nbaSeason = getNbaSeasonEntity(seasonYear);
 
         NbaTeamEntity nbaTeam = nbaTeamService.getTeamEntityByCode(teamCode);
