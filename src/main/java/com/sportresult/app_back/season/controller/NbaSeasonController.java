@@ -22,6 +22,7 @@ public class NbaSeasonController {
     @Operation(summary = "Return a Season from a year")
     @GetMapping("/{year}")
     public ResponseEntity<NbaSeasonDto> getNbaSeason(@PathVariable int year) {
+        log.info("getNbaSeason year: {}", year);
         NbaSeasonDto seasonDto = nbaSeasonService.findNbaSeasonByYear(year);
         return ResponseEntity.ok(seasonDto);
     }
@@ -29,6 +30,7 @@ public class NbaSeasonController {
     @Operation(summary = "Add a Season from a year")
     @PostMapping("/{year}")
     public ResponseEntity<NbaSeasonDto> addNbaSeason(@PathVariable int year) {
+        log.info("addNbaSeason year: {}", year);
         NbaSeasonDto seasonDto = nbaSeasonService.createNbaSeasonByYear(year);
         return ResponseEntity.ok(seasonDto);
     }

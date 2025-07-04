@@ -26,6 +26,7 @@ public class NbaTeamController {
     @Operation(summary = "Return a Team from a code")
     @GetMapping("code/{code}")
     public ResponseEntity<NbaTeamDto> getNbaTeam(@PathVariable String code) {
+        log.info("getNbaTeam code: {}", code);
         NbaTeamDto nbaTeamDtos = nbaTeamService.getTeamByCode(code);
         return ResponseEntity.ok(nbaTeamDtos);
     }
@@ -33,6 +34,7 @@ public class NbaTeamController {
     @Operation(summary = "Return Teams from a conference")
     @GetMapping("conference/{conference}")
     public ResponseEntity<List<NbaTeamDto>> getNbaTeamByConference(@PathVariable String conference) {
+        log.info("getNbaTeamByConference conference: {}", conference);
         List<NbaTeamDto> nbaTeamDtos = nbaTeamService.getTeamsByConference(conference);
         return ResponseEntity.ok(nbaTeamDtos);
     }
@@ -40,6 +42,7 @@ public class NbaTeamController {
     @Operation(summary = "Return Teams from a division")
     @GetMapping("division/{division}")
     public ResponseEntity<List<NbaTeamDto>> getNbaTeamByDivision(@PathVariable String division) {
+        log.info("getNbaTeamByDivision division: {}", division);
         List<NbaTeamDto> nbaTeamDtos = nbaTeamService.getTeamsByDivision(division);
         return ResponseEntity.ok(nbaTeamDtos);
     }
@@ -47,6 +50,7 @@ public class NbaTeamController {
     @Operation(summary = "Return Teams from a division")
     @GetMapping("/nbaFanchise")
     public ResponseEntity<List<NbaTeamDto>> getAllNbaTeams() {
+        log.info("getAllNbaTeams");
         List<NbaTeamDto> nbaTeamDtos = nbaTeamService.getAllNbaTeams();
         return ResponseEntity.ok(nbaTeamDtos);
     }

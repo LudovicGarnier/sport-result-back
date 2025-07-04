@@ -19,6 +19,7 @@ public class NbaTeamService {
     private final NbaTeamRepository nbaTeamRepository;
 
     public NbaTeamDto getTeamByCode(String code) {
+        log.info("getTeamByCode: {}", code);
         List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByCode(code);
 
         if (nbaTeamEntities.isEmpty()) {
@@ -28,6 +29,7 @@ public class NbaTeamService {
     }
 
     public NbaTeamEntity getTeamEntityByCode(String code) {
+        log.info("getTeamEntityByCode: {}", code);
         List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByCode(code);
 
         if (nbaTeamEntities.isEmpty()) {
@@ -37,6 +39,7 @@ public class NbaTeamService {
     }
 
     public List<NbaTeamDto> getTeamsByConference(String conference) {
+        log.info("getTeamsByConference: {}", conference);
         List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByConference(conference);
 
         if (nbaTeamEntities.isEmpty()) {
@@ -47,6 +50,7 @@ public class NbaTeamService {
 
 
     public List<NbaTeamDto> getTeamsByDivision(String division) {
+        log.info("getTeamsByDivision: {}", division);
         List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByDivision(division);
 
         if (nbaTeamEntities.isEmpty()) {
@@ -57,6 +61,7 @@ public class NbaTeamService {
 
 
     public List<NbaTeamDto> getAllNbaTeams() {
+        log.info("getAllNbaTeams");
         List<NbaTeamEntity> nbaTeamEntities = nbaTeamRepository.findByNbaFranchise(true);
 
         if (nbaTeamEntities.isEmpty()) {

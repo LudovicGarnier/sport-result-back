@@ -24,6 +24,7 @@ public class NbaArenaController {
     @Operation(summary = "Return an Arena from a name")
     @GetMapping("/{name}")
     public ResponseEntity<NbaArenaDto> getNbaArenaByName(@PathVariable String name) {
+        log.info("Getting NBA Arena by name: {}", name);
         NbaArenaDto arenaDto = nbaArenaService.getNbaArenaEntitiesByName(name);
         return ResponseEntity.ok(arenaDto);
     }

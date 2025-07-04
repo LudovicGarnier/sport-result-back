@@ -17,12 +17,9 @@ public class NbaArenaService {
     private final NbaArenaRepository nbaArenaRepository;
 
     public NbaArenaDto getNbaArenaEntitiesByName(String name) {
+        log.info("getNbaArenaEntitiesByName : {}", name);
         NbaArenaEntity arenaEntity = nbaArenaRepository.findNbaArenaEntitiesByName(name).orElseThrow(
                 () -> new EntityNotFoundException("NBA Arena Not Found for Name: " + name));
         return arenaEntity.toDto();
-    }
-
-    public NbaArenaEntity save(NbaArenaEntity nbaArenaEntity) {
-        return nbaArenaRepository.saveAndFlush(nbaArenaEntity);
     }
 }
