@@ -19,6 +19,8 @@ public record NbaGameDto(
         Integer timesTied,
         Integer leadChanges,
         List<String> officials,
+        List<String> visitorLineScore,
+        List<String> homeLineScore,
         Integer homeScore,
         Integer visitorScore,
         Integer homeWin,
